@@ -1,5 +1,5 @@
 // Configure API Base URL. Change this when deploying frontend to Vercel and backend to IIS.
-const API_BASE_URL = 'https://localhost:5055'; // Replace with IIS URL/Port when running locally
+const API_BASE_URL = 'https://192.168.0.140:6001'; // Public reverse-proxy IP for Vercel/Mobile
 
 let currentPath = '';
 let currentDrives = [];
@@ -8,7 +8,7 @@ let monacoEditor = null;
 let currentSort = { column: 'name', asc: true };
 
 // Bootstrap elements
-const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+
 const previewModal = new bootstrap.Modal(document.getElementById('previewModal'));
 
 // Helper for making API requests
@@ -274,6 +274,7 @@ async function openPreview(node) {
     const ext = node.extension.toLowerCase();
     const isImage = imageExts.includes(ext);
     const isCode = codeExts.includes(ext);
+    const isPdf = ext === '.pdf';
     
     const viewUrl = `${API_BASE_URL}/api/explorer/view?path=${encodeURIComponent(node.fullPath)}${getAuthQueryString()}`;
     const downloadUrl = `${API_BASE_URL}/api/explorer/download?path=${encodeURIComponent(node.fullPath)}${getAuthQueryString()}`;
@@ -285,6 +286,7 @@ async function openPreview(node) {
     
     document.getElementById('imagePreview').classList.add('d-none');
     document.getElementById('editorContainer').classList.add('d-none');
+    document.getElementById('iframePreview').classList.add('d-none');
     document.getElementById('unsupportedPreview').classList.add('d-none');
     document.getElementById('previewLoading').classList.remove('d-none');
     
@@ -297,6 +299,12 @@ async function openPreview(node) {
         img.src = viewUrl;
         document.getElementById('imagePreview').classList.remove('d-none');
     } 
+    else if (isPdf) {
+        const iframe = document.getElementById('iframePreview');
+        iframe.onload = () => document.getElementById('previewLoading').classList.add('d-none');
+        iframe.src = viewUrl;
+        document.getElementById('iframePreview').classList.remove('d-none');
+    }
     else if (isCode || node.size < 1024 * 500) { 
         try {
             const fetchUrl = `/api/explorer/view?path=${encodeURIComponent(node.fullPath)}`;
