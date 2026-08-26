@@ -1,5 +1,5 @@
 // Configure API Base URL. Change this when deploying frontend to Vercel and backend to IIS.
-const API_BASE_URL = 'https://192.168.0.140:6001'; // Public reverse-proxy IP for Vercel/Mobile
+const API_BASE_URL = 'https://59.95.101.93:8935'; // Public reverse-proxy IP for Vercel/Mobile
 
 let currentPath = '';
 let currentDrives = [];
