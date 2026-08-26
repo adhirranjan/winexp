@@ -1,5 +1,5 @@
 // Configure API Base URL. Change this when deploying frontend to Vercel and backend to IIS.
-const API_BASE_URL = 'https://59.95.101.93:8935'; // Public reverse-proxy IP for Vercel/Mobile
+const API_BASE_URL = 'https://192.168.0.140:6001'; // Public reverse-proxy IP for Vercel/Mobile
 
 let currentPath = '';
 let currentDrives = [];
@@ -238,7 +238,7 @@ function renderFileList() {
 }
 
 const imageExts = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp'];
-const codeExts = ['.cs', '.js', '.ts', '.html', '.css', '.json', '.xml', '.sql', '.md', '.yml', '.yaml', '.py', '.txt', '.ps1', '.ini', '.config', '.sln', '.csproj'];
+const codeExts = ['.cs', '.vb', '.js', '.ts', '.html', '.css', '.json', '.xml', '.sql', '.md', '.yml', '.yaml', '.py', '.txt', '.ps1', '.ini', '.config', '.sln', '.csproj'];
 
 function getIconInfo(node) {
     if (node.isDirectory) return { icon: 'bi bi-folder-fill icon-folder', type: 'folder' };
@@ -256,7 +256,7 @@ function getIconInfo(node) {
 
 function getMonacoLang(ext) {
     const map = {
-        '.cs': 'csharp', '.js': 'javascript', '.ts': 'typescript', 
+        '.cs': 'csharp', '.vb': 'vb', '.js': 'javascript', '.ts': 'typescript', 
         '.html': 'html', '.css': 'css', '.json': 'json', 
         '.xml': 'xml', '.sql': 'sql', '.md': 'markdown', 
         '.yml': 'yaml', '.yaml': 'yaml', '.py': 'python', 
