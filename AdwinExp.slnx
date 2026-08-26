@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/backend/">
+    <Project Path="backend/WebFileManager.csproj" />
+  </Folder>
+  <Folder Name="/reverse-proxy/">
+    <Project Path="reverse-proxy/ReverseProxy.csproj" />
+  </Folder>
+</Solution>
